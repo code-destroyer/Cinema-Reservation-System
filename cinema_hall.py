@@ -8,7 +8,7 @@ class CinemaHall:
         self.result = self.empty_hall.strip('\n')
         self.movie_hall = [[spot for spot in row] for row in self.result.split('\n')]
         self.count_taken_seats = 0
-        self.taken_seats = [['2','2']]
+        self.taken_seats = []
 
     def take_seats(self, seats):
         if self.check_seat_validity(seats):

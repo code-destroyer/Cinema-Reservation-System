@@ -114,6 +114,8 @@ class CommandLineInterface:
                 print(self.manager.show_movies_projections(int(movie_id), movie_date))
             if command == 'cancel_reservation':
                 self.cancel_name_check()
+            if command == 'exit':
+                sys.exit()
             if command == 'make_reservation':
                 name = self.name_input()
                 tickets = self.ticket_input()
@@ -153,7 +155,7 @@ def main():
     CLI = CommandLineInterface()
     print("Welcome to NextDimensionCinema movie reservation system")
     print(55 * '*')
-    print("Command list:\n 1 - show_movies\n 2 - show_movie_projections\n 3 - make_reservation\n 4 - cancel_reservation\n")
+    print("Command list:\n 1 - show_movies\n 2 - show_movie_projections\n 3 - make_reservation\n 4 - cancel_reservation\n 5 - help\n 6 - exit \n")
     CLI.cinema_interface()
     #print(CLI.projection_availability_checker('2', '2'))
 
