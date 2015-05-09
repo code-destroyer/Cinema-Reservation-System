@@ -76,6 +76,17 @@ class ManageMovies:
         self.cursor.execute('''INSERT INTO Reservations(username, projection_id, row, col)
                                VALUES (?,?,?,?)''',(name, projection_id, seats[0], seats[1]))
 
+    def cancel_reservation(self, name):
+        self.cursor.execute('''DELETE FROM Reservations WHERE username = ?''', (name,))
+
+    def get_names_of_reservations(self):
+        reservation_names = []
+        self.cursor.execute('''SELECT username FROM Reservations''')
+        for row in self.cursor:
+            reservation_names.append(row['username'])
+        return reservation_names
+
+
 
 def main():
     m = ManageMovies()

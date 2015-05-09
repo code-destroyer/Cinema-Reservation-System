@@ -80,6 +80,16 @@ class CommandLineInterface:
                 self.taken_by_you_seat = []
                 self.multiple_seat_selection(tickets)
 
+    def cancel_name_check(self):
+        name = input('Enter the name whose reservation you want to delete: ')
+        if name not in self.manager.get_names_of_reservations():
+            print('Reservation for {} not found!'.format(name))
+            self.cancel_name_check()
+        else:
+            self.manager.cancel_reservation(name)
+            self.manager.db.commit()
+            print('Reservation for {} canceled!'.format(name))
+
     def finalize(self):
         finalize_reservation = input("Enter keyword 'finalize' in order to submit your reservation, 'discard' - to give up reservation! ")
         if finalize_reservation == 'finalize':
@@ -102,6 +112,8 @@ class CommandLineInterface:
                 movie_date = input("Enter date(optional): ")
                 self.manager.get_movie_name(movie_id, movie_date)
                 print(self.manager.show_movies_projections(int(movie_id), movie_date))
+            if command == 'cancel_reservation':
+                self.cancel_name_check()
             if command == 'make_reservation':
                 name = self.name_input()
                 tickets = self.ticket_input()
@@ -141,9 +153,9 @@ def main():
     CLI = CommandLineInterface()
     print("Welcome to NextDimensionCinema movie reservation system")
     print(55 * '*')
-    print("Command list:\n 1 - show_movies\n 2 - show_movie_projections\n 3 - make_reservation")
+    print("Command list:\n 1 - show_movies\n 2 - show_movie_projections\n 3 - make_reservation\n 4 - cancel_reservation\n")
     CLI.cinema_interface()
-
+    #print(CLI.projection_availability_checker('2', '2'))
 
 
 
